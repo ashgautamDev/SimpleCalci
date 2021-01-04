@@ -15,24 +15,25 @@
         android:id="@+id/lltop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
         android:orientation="vertical"
-        android:gravity="bottom"
         app:layout_constraintBottom_toTopOf="@+id/llbottom"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:id="@+id/tvplaceholder"
             android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textAlignment="viewEnd"
+            android:textSize="32sp" />
 
         <TextView
             android:id="@+id/tvResult"
-            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textAlignment="viewEnd"
+            android:textSize="34sp" />
 
 
     </LinearLayout>
@@ -40,7 +41,7 @@
     <LinearLayout
         android:id="@+id/llbottom"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

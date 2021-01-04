@@ -7,7 +7,8 @@ import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import javax.xml.xpath.XPathExpression
+import net.objecthunter.exp4j.ExpressionBuilder
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var actionDivide: ImageButton
@@ -18,14 +19,14 @@ class MainActivity : AppCompatActivity() {
     private lateinit var actionEquals: ImageButton
 
     private lateinit var placeholder: TextView
-    private lateinit var result: TextView
+    private lateinit var tvresult: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         placeholder = findViewById(R.id.tvplaceholder)
-        result = findViewById(R.id.tvResult)
+        tvresult = findViewById(R.id.tvResult)
 
         val num0 = findViewById<Button>(R.id.num0)
         val num1 = findViewById<Button>(R.id.num1)
@@ -74,20 +75,39 @@ class MainActivity : AppCompatActivity() {
             val expression = placeholder.text.toString()
             if (expression.isNotEmpty()) {
                 placeholder.text = expression.substring(0, expression.length - 1)
+
             }
 
 
         }
+        actionEquals.setOnClickListener {
+            try {
+                val expression = ExpressionBuilder(placeholder.text.toString()).build()
+                val result = expression.evaluate()
+                val longResult = result.toLong()
+                if (result == longResult.toDouble()) {
+                    Toast.makeText(this, "Double", Toast.LENGTH_SHORT).show()
 
+                    tvresult.text = longResult.toString()
+                } else
+                    tvresult.text = result.toString()
 
+            } catch (e: Exception) {
+                Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show();
+
+                Log.d("EXCEPTION", "Message: ${e.message}")
+            }
+
+        }
     }
         fun appendVal(string: String, isClear: Boolean) {
             if (isClear) {
                 placeholder.text = ""
-                result.text = ""
+                tvresult.text = ""
 //            placeholder.append(string)
             } else {
                 placeholder.append(string)
+
             }
         }
 
